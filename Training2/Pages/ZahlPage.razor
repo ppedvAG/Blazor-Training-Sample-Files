@@ -1,0 +1,18 @@
+﻿@page "/ZahlPage"
+@using Training2.Data
+@inject SharedModel sharedmodel
+<h3>ZahlPage</h3>
+@sharedmodel.Zahl
+<button @onclick="pluseins">+</button>
+@code {
+
+    public void pluseins()
+    {
+        sharedmodel.Zahl++;
+
+    }
+    protected override void OnInitialized()
+    {
+        sharedmodel.PropertyChangedEvent += (_, __) => InvokeAsync(StateHasChanged) ;
+    }
+}
