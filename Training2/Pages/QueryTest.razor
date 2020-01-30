@@ -1,0 +1,29 @@
+﻿@page "/querytest"
+@using Microsoft.AspNetCore.Mvc
+@using  Microsoft.AspNetCore.WebUtilities;
+@inject NavigationManager navManager
+<h3>QueryTest</h3>
+@MyProperty
+<button @onclick="SetQuery" @onkey>set query</button>
+@code {
+    public string MyProperty { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        //[FromQuery]string id nene tut nur in aspnet core
+
+        var uri = navManager.ToAbsoluteUri(navManager.Uri);
+        QueryHelpers.ParseQuery(uri.Query).TryGetValue("name", out var param);
+
+        MyProperty = param;
+
+
+    }
+    public void SetQuery()
+    {
+
+
+        var uri = navManager.ToAbsoluteUri(navManager.Uri);
+        QueryHelpers.AddQueryString(uri.AbsoluteUri, "name", "Wert");
+        navManager.NavigateTo(QueryHelpers.AddQueryString(uri.AbsoluteUri, "name", "Wert"));
+    }
+}

@@ -1,0 +1,23 @@
+﻿@page "/entertaste"
+<h3>EnterTaste</h3>
+<input @bind="MyProperty" @onfocusout="@(_=>Liste.Add(MyProperty))" @onkeyup="@check4enter" />
+<br />
+
+<ul>
+    @foreach (var item in Liste)
+    {
+        <li>@item</li>
+    }
+</ul>
+@code {
+    public string MyProperty { get; set; }
+    public List<string> Liste { get; set; } = new List<string>();
+    public void check4enter(KeyboardEventArgs e)
+    {
+        if (e.Key=="Enter")
+        {
+            Liste.Add(MyProperty);
+
+        }
+    }
+}

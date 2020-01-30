@@ -1,0 +1,14 @@
+﻿@page "/jsinvokesample"
+@*@inject IJSRuntime JSRuntime*@
+<h3>JSinvokeSample</h3>
+<button @onclick="show">show</button>
+@code {
+
+    [Inject]
+    IJSRuntime JSRuntime { get; set; }
+    public async void show()
+    {
+
+        await JSRuntime.InvokeVoidAsync("alert", "Hallo Welt");
+    }
+}
