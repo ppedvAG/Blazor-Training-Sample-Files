@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Routing;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,8 +14,15 @@ namespace Training2.Components
         [Inject]
         NavigationManager navigationManager { get; set; }
         public String[] Farben { get; set; } = { "red", "aqua", "fuchsia", "green", "blue", "lime", "yellow", "purple", "silver" };
+    
+        private double[] _daten;
         [Parameter]
-        public double[] Daten { get; set; }
+        public double[] Daten { 
+            get { return _daten; }
+            
+            set { _daten = value;
+                StateHasChanged();
+            } }
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             if (Daten == null)
@@ -34,6 +42,8 @@ namespace Training2.Components
 
             for (int i = 0; i < Daten.Count(); i++)
             {
+                builder.OpenElement(++seq, "a");
+                builder.AddAttribute(++seq, "href", $"{navigationManager.Uri}#{i.ToString()}");
 
                 winkel = Daten[i] * summe;
                 var winkelInRadians = (winkel - 90) * Math.PI / 180.0;
@@ -47,6 +57,8 @@ namespace Training2.Components
                 builder.AddAttribute(++seq, "fill", Farben[i]);
                 builder.CloseElement();
                 deltawinkel += winkel;
+
+                builder.CloseElement(); //</a>
             }
 
             builder.CloseElement();
@@ -58,7 +70,24 @@ namespace Training2.Components
 
         protected override void OnInitialized()
         {
+            navigationManager.LocationChanged += LocationChanged;
             base.OnInitialized();
+        }
+
+        private void LocationChanged(object sender, LocationChangedEventArgs e)
+        {
+            OnPieSelected?.Invoke(navigationManager.Uri);
+        }
+
+        public void UpdateDaten(double[] d)
+        {
+            Daten = d;
+        }
+        public event Action<string> OnPieSelected;
+
+      void Dispose()
+        {
+            navigationManager.LocationChanged -= LocationChanged;
         }
     }
 }

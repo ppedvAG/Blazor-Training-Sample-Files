@@ -21,5 +21,10 @@ namespace Training2.Pages
             base.OnInitialized();
          
         }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+        }
     }
 }
