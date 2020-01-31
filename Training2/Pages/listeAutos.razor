@@ -1,5 +1,45 @@
-﻿<h3>listeAutos</h3>
+﻿@page "/listeautos"
+@using Training2.Data
+<h3>listeAutos</h3>
+<div class="row">
+    <div class="col">
+        <div class="accordion" id="accordion">
 
+            @for (int i = 0; i < VM.AutoListe.Count(); i++)
+            {
+                int t = i;
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">
+                            <button data-toggle="collapse"
+                                    @onclick="@(x => {  ActiveTab =t;})"
+                                    data-parent="#accordion" href="#collapse1" class="btn btn-link">
+                                <span class="badge badge-info float-left">@VM.AutoListe[i].Type.Count()</span>   @VM.AutoListe[i].Hersteller 
+                            </button>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class='collapse @(ActiveTab==i?"show":"")'>
+                        <div class="card-body">
+                            <ul>
+                                @foreach (var item2 in VM.AutoListe[i].Type)
+                                {
+                                    <li>@item2.Name</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+
+    </div>
+    @ActiveTab  
+</div>
 @code {
+    public int ActiveTab { get; set; }
+
+    public CarsModel VM { get; set; } = new CarsModel();
 
 }

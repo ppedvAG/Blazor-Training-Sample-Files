@@ -23,7 +23,7 @@ namespace Training2.Data
             AutoListe.Add(new Cars()
             {
                 Hersteller = "VW",
-                Type = new Type[] { new Type("Golf"), new Type("Polo"), new Type("Beatle"), new Type("Touran") }
+                Type = new Type[] { new Type("Golf"), new Type("Polo"), new Type("Beatle"), new Type("Touran"), new Type("T5") }
             });
             AutoListe.Add(new Cars()
             {
