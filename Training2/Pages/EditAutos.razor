@@ -1,0 +1,39 @@
+﻿@page "/editautos"
+@page "/editautos/{auto}"
+
+@using Training2.Data
+<h3>EditAutos</h3>
+@if (auto==null)
+{
+    <div>ULR kein Auto Parameter</div>
+
+}
+else
+{
+<EditForm Model="@FormVM" OnValidSubmit="speichern">
+    <InputText @bind-Value="FormVM.Hersteller"></InputText>
+    <ValidationSummary></ValidationSummary>
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <button type="submit">speichern</button>
+</EditForm>
+}
+
+
+
+@code {
+    [Parameter]
+    public string auto { get; set; }
+    public CarsModel VM { get; set; } = new CarsModel();
+    public Cars FormVM { get; set; }
+    public void speichern()
+    {
+
+
+    }
+
+    protected override void OnInitialized()
+    {
+        FormVM = VM.AutoListe.FirstOrDefault(x => x.Hersteller == auto);
+
+    }
+}

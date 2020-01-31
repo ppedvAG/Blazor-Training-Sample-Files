@@ -1,0 +1,12 @@
+﻿<h3>test</h3>
+<div @attributes="AttrVar">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter(CaptureUnmatchedValues =true)]
+    public Dictionary<string,object> AttrVar { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}
