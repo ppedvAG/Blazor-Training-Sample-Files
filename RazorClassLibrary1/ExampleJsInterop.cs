@@ -9,7 +9,7 @@ namespace RazorClassLibrary1
         {
             // Implemented in exampleJsInterop.js
             return jsRuntime.InvokeAsync<string>(
-                "exampleJsFunctions.showPrompt",
+                "showPrompt2",
                 message);
         }
     }

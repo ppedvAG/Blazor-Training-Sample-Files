@@ -1,0 +1,11 @@
+﻿@page "/uselib"
+@using RazorClassLibrary1
+@inject IJSRuntime JSRuntime
+<h3>UseLibComponent</h3>
+<button @onclick="Test">ok</button>
+@code {
+    public void Test()
+    {
+        ExampleJsInterop.Prompt(JSRuntime, "Nachricht");
+    }
+}

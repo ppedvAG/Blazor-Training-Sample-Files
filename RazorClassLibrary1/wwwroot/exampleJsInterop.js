@@ -6,3 +6,7 @@ window.exampleJsFunctions = {
     return prompt(message, 'Type anything here');
   }
 };
+function showPrompt2(message) {
+    prompt(message, "tippen");
+}
+//das geht nun auch (überraschung)
