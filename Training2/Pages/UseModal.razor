@@ -1,0 +1,18 @@
+﻿@page "/usemodal"
+<h3>useModal</h3>
+<ModalComponent Title="Mein modal" @ref="modal1" OnClosed="Geschlossen">
+    <p>das ist mein Content</p>
+</ModalComponent>
+<button @onclick="openmodal">show</button>
+@code {
+    ModalComponent modal1;
+    void openmodal()
+    {
+        modal1.show();
+    }
+    void Geschlossen(string para)
+    {
+
+    }
+
+}

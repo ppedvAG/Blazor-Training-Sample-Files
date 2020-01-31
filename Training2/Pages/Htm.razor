@@ -1,0 +1,55 @@
+﻿@page "/html"
+@using Training2.Data
+
+
+<h3>Html</h3>
+
+<select @bind="Auto">
+    @foreach (var item in Autos)
+    {
+        <option value="@item">@item</option>
+    }
+</select>
+
+<hr />
+<select @bind="VM.Auto">
+    @foreach (var item in VM.AutoListe)
+    {
+        <option value="@item.Hersteller">@item.Hersteller</option>
+    }
+
+</select>
+@if (VM.Auto != null)
+{
+    var al = VM.AutoListe.Single(x => x.Hersteller == VM.Auto).Type;
+    <select @bind="VM.Typ">
+        @foreach (var item in al)
+        {
+            <option value="@item.Name">@item.Name</option>
+        }
+
+    </select>
+
+}
+@VM.AutoListe[0].Type[0].Name
+
+<hr />
+<div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" 
+           @bind="VM.Off"
+           id="switch1" >
+    <label class="custom-control-label" for="switch1">alle Autos</label>
+</div>
+
+@code {
+   
+    public CarsModel VM { get; set; } = new CarsModel();
+    public string[] Autos { get; set; } = new string[] { "BMW", "AUDI", "VW", "Chevrolet" };
+    public string Auto { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+    }
+}
