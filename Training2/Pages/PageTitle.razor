@@ -1,0 +1,11 @@
+﻿@page "/Titel"
+@inject IJSRuntime  JSRuntime
+<h3>PageTitle</h3>
+
+@code {
+    protected override void OnInitialized()
+    {
+        //document.title="dfdfgdf
+        JSRuntime.InvokeVoidAsync("eval", "document.title='Hallo Welt'");
+    }
+}

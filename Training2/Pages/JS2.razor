@@ -1,0 +1,11 @@
+﻿@page "/js2" 
+<h3>JS2</h3>
+
+@code {
+    [JSInvokable]
+    public static string Demo()
+    {
+        return Guid.NewGuid().ToString();
+
+    }
+}

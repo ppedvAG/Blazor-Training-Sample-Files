@@ -20,7 +20,7 @@
     <app>
         <component type="typeof(App)" render-mode="ServerPrerendered" />
     </app>
-
+    <button onclick="callBlazor()">call Blazor</button>
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
             An error has occurred. This application may no longer respond until reloaded.
@@ -37,7 +37,11 @@
     <script src="_framework/blazor.server.js"></script>
     <script src="_content/RazorClassLibrary1/examplejsinterop.js"></script>
     <script>
-
+        function callBlazor() {
+         //  alert(DotNet.invokeMethodAsync("Training2","Demo"));
+            DotNet.invokeMethodAsync("Training2","Demo").then((data) => alert(data))
+                .catch((data) => console.log(data));
+        }
     </script>
 </body>
 </html>
